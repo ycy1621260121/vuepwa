@@ -1,0 +1,75 @@
+.indexpage {
+  background-color: #f5f6fa;
+  color: white;
+  text-align: center;
+  font-size: 32px; }
+
+.indexinput-box {
+  padding: 24px;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+  .indexinput-box .indexinput {
+    flex: 1;
+    width: -webkit-fill-available;
+    font-size: 36px;
+    border-radius: 10px;
+    background-color: #f5f6fa;
+    padding: 20px; }
+
+#dombox {
+  column-count: 2;
+  column-gap: 16px;
+  overflow: hidden; }
+  #dombox .item {
+    border: solid 2px white;
+    font-size: 36px;
+    display: inline-block;
+    width: -webkit-fill-available; }
+    #dombox .item.active {
+      color: red; }
+
+.demo-spin-container {
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+  position: relative;
+  border: 1px solid #eee; }
+
+.ivu-spin-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 0 12px 0; }
+
+.todoitem {
+  display: flex;
+  margin: 8px auto;
+  border-radius: 5px;
+  border: 1px solid #333;
+  box-shadow: 0 0 5px #333;
+  font-size: 24px; }
+  .todoitem:hover {
+    box-shadow: 0 0 0.5rem #333; }
+  .todoitem .content {
+    display: flex;
+    flex: 1 1;
+    flex-flow: column;
+    cursor: pointer; }
+    .todoitem .content .title {
+      padding: 0 10px;
+      flex: 1 1;
+      font-size: 1.2rem;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .todoitem .content .time {
+      padding: 0 1rem;
+      flex: 1 1; }
+
+.imgthis {
+  width: 702px;
+  height: 443px; }
+
+.title-center {
+  font-size: 20px; }
+
+/*# sourceMappingURL=index.css.map */

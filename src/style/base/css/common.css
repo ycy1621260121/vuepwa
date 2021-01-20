@@ -1,0 +1,19 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border: none;
+  outline: none;
+  -webkit-overflow-scrolling: touch;
+  text-underline: none;
+  font-size: 32px;
+  align-self: center;
+  font-family: '微软雅黑', Arial; }
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden; }
+
+/*# sourceMappingURL=common.css.map */
