@@ -4,7 +4,7 @@
             <img src="../../assets/logo.png" alt="logo" class="mine-img">
         </div>
         <!--使用draggable组件-->
-        <draggable v-model="myArray" ghostClass="ghost" chosenClass="chosen" forceFallback="true" group="people"
+        <draggable v-model="$store.state.myArray" ghostClass="ghost" chosenClass="chosen" forceFallback="true" group="people"
                    animation="1000" @start="onStart" @end="onEnd">
             <transition-group class="item-box">
                 <div class="item" v-for="element in myArray" :key="element.id">
@@ -30,14 +30,10 @@
     })
     export default class Apps extends Vue {
         drag = false;
-        myArray = [
-            {id: 1, name: '&#xe664;'},
-            {id: 2, name: '&#xe605;'},
-            {id: 3, name: '&#xe667;'},
-            {id: 4, name: '&#xe67b;'},
-            {id: 5, name: '&#xe6e1;'},
-            {id: 6, name: '&#xe688;'}
-        ];
+
+        get myArray() {
+            return this.$store.state.myArray
+        }
 
         public onStart() {
             this.drag = true;
@@ -46,6 +42,7 @@
         //拖拽结束事件
         public onEnd() {
             this.drag = false;
+            this.$store.commit('changemyArray',this.myArray)
         }
     }
 

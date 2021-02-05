@@ -29,5 +29,6 @@ declare namespace Utils {
         isLogin?: boolean;
         includeList?: any[];
         cartList?: any[];
+        myArray?: any[]
     }
 }

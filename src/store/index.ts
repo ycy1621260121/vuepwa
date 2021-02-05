@@ -32,6 +32,9 @@ export const mutations = {
               return preVal
           }, []);
         state.cartList = cartList2;
+    },
+    changemyArray(state: any,data: any){
+        state.myArray = data
     }
 };
 export const actions = {
@@ -64,7 +67,15 @@ const store: StoreOptions<Utils.Stores> = {
         productData: [],
         parents: '还哈哈哈',
         isLogin: true,
-        cartList:[]
+        cartList:[],
+        myArray: [
+            {id: 1, name: '&#xe664;'},
+            {id: 2, name: '&#xe605;'},
+            {id: 3, name: '&#xe667;'},
+            {id: 4, name: '&#xe67b;'},
+            {id: 5, name: '&#xe6e1;'},
+            {id: 6, name: '&#xe688;'}
+        ]
     },
     mutations,
     actions,
