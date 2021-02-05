@@ -19,9 +19,15 @@ export const mutations = {
         state.parents = data;
     },
     addCart(state, data) {
-        const cartList = [];
+        const cartList = state.cartList || [];
         cartList.push(data);
-        state.cartList = cartList;
+        //数组去重
+        const hash = [];
+        const cartList2 = cartList.reduce((preVal, curVal) => {
+            hash[curVal._id] ? '' : hash[curVal._id] = true && preVal.push(curVal);
+            return preVal;
+        }, []);
+        state.cartList = cartList2;
     }
 };
 export const actions = {
