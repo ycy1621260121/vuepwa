@@ -38,11 +38,7 @@ export const actions = {
     },
     //获取云开发数据
     async getProductData(context, payload) {
-        await axios.post('/getProductData', { token: encodeURIComponent(payload.token) }, {
-            headers: {
-                'Cache-Control': 'max-age=315360000'
-            }
-        })
+        await axios.post('/getProductData', { token: encodeURIComponent(payload.token) }, {})
             .then((res) => {
             //if (payload.success) payload.success(res); //同步回调
             context.commit('setProductData', res);
