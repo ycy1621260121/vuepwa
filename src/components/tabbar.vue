@@ -35,9 +35,11 @@
     export default class Tabbar extends Vue {
         private active = '0';
 
+        //购物车下标数量
+        get badges() {
+            return this.$store.state.cartList.length
+        }
         created() {
-            const badges = localStorage.getItem('badges') || '0';
-            (this as any).badges = badges;
             const navtoItem = localStorage.getItem('navtoItem') || '0';
             (this as any).active = navtoItem;
         }
