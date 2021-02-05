@@ -1,6 +1,8 @@
 <template>
     <div class="about">
-        <!--使用draggable组件-->
+        <div class="mine-box">
+            <img src="../../assets/logo.png" alt="logo" class="mine-img">
+        </div>
         <!--使用draggable组件-->
         <draggable v-model="myArray" ghostClass="ghost" chosenClass="chosen" forceFallback="true" group="people"
                    animation="1000" @start="onStart" @end="onEnd">
@@ -49,6 +51,13 @@
 
 </script>
 <style lang="scss" scoped>
+    .mine-box{
+        background-color: #f1f1f1;
+        margin-bottom: 24px;
+    }
+    .mine-img{
+        width: 60%;
+    }
     /*定义要拖拽元素的样式*/
     .drag {
         background-color: blue !important;
@@ -83,24 +92,20 @@
     .item-box{
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         flex-wrap: wrap;
+        margin: 4px;
     }
 
     .item {
-        width: 200px;
-        height: 200px;
+        width: 230px;
+        height: 230px;
         border-radius: 10px;
-        margin: 0px 10px 0px 10px;
         border: solid 1px #eee;
         background-color: #f1f1f1;
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-
-    .item + .item {
-        border-top: none;
         margin-top: 6px;
     }
 
