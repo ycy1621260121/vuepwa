@@ -11,7 +11,7 @@
                 </div>
             </li>
         </ul>
-        <van-skeleton title :row="3" v-if="cartLists.length == 0" style="margin-top: 24px"/>
+        <van-skeleton title :row="3" v-if="cartLists.length == 0" style="padding-top: 24px"/>
         <Tabbar></Tabbar>
     </div>
 </template>

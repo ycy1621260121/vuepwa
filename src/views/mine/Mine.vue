@@ -8,7 +8,7 @@
                    animation="1000" @start="onStart" @end="onEnd">
             <transition-group class="item-box">
                 <div class="item" v-for="element in myArray" :key="element.id">
-                    <i class="iconfont" v-html="element.name"></i>
+                    <i class="iconfont mineicon" v-html="element.name"></i>
                     <div>{{element.id}}</div>
                 </div>
             </transition-group>
@@ -48,6 +48,9 @@
 
 </script>
 <style lang="scss" scoped>
+    .mineicon{
+        font-size: 60px;
+    }
     .mine-box{
         background-color: #f1f1f1;
         margin-bottom: 24px;
