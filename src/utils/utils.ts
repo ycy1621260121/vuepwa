@@ -14,6 +14,7 @@ declare namespace Utils {
         isClick?: number;
         indexList?: any;
         busy?: boolean;
+        drag?: boolean;
     }
 
     export interface Commoditys {
@@ -27,5 +28,6 @@ declare namespace Utils {
         parents?: string;
         isLogin?: boolean;
         includeList?: any[];
+        cartList?: any[];
     }
 }

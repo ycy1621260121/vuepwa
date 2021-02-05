@@ -3,6 +3,7 @@ import {classModule} from 'snabbdom/modules/class';
 import {propsModule} from 'snabbdom/modules/props';
 import {styleModule} from 'snabbdom/modules/style';
 import {eventListenersModule} from 'snabbdom/modules/eventlisteners';
+import store from '../store'
 
 class Animals implements Utils.Light {
     public userName = 'Tom';
@@ -44,7 +45,6 @@ class Animals implements Utils.Light {
                 //   }
                 // }
                 // return h('tr', {}, tds)
-
                 //创建li列表
                 return h(
                     'li',
@@ -58,13 +58,16 @@ class Animals implements Utils.Light {
                         props: {
                             'data-index': index,
                             'data-id': item._id,
-                            'data-title': item.commodity
+                            'data-title': item.commodity,
+                            'v:key': item.id
                         },
                         on: {
                             click: this.acount
                         }
                     },
-                    item.commodity + ''
+                    [h('div', {class: {title: true}}, item.commodity),
+                        h('div', {class: {price: true}}, '￥'+item.unitprice)
+                    ]
                 );
             })
         );
@@ -73,7 +76,7 @@ class Animals implements Utils.Light {
         if (this.vnode) {
             // re-render
             patch(this.vnode, this.newVnode);
-        }else{
+        } else {
             //没有dom或者跳转回home页面时
             // 初次渲染
             patch(container, this.newVnode);
@@ -92,6 +95,8 @@ class Animals implements Utils.Light {
     public acount(e: any) {
         //console.log(e.target['data-index']?e.target['data-index']:0,e.target['data-id'],e.target['data-title'])
         let ele: any;
+        const productData = JSON.parse(store.state.productData.data.resp_data).webProduct.data;
+        store.commit('addCart',productData[e.target['data-index']?e.target['data-index']:0])
         for (ele of e.target.parentNode.childNodes) {
             if (ele.className.includes('active')) {
                 ele.classList.remove('active');

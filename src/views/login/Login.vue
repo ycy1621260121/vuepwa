@@ -1,7 +1,7 @@
 <template>
     <div>
-        <img src="../../assets/id-card.png" alt="" class="imgthis">
-        <button @click="login">登录</button>
+        <img src="../../assets/logo.png" alt="" class="">
+        <button @click="login" class="login">登录</button>
     </div>
 </template>
 
@@ -23,6 +23,11 @@
 
 </script>
 
-<style lang="css">
-    @import "../../style/scss/css/index.css";
+<style lang="scss" scoped>
+    .login{
+        width: 702px;
+        height: 100px;
+        background-color: #ff6464;
+        color: white;
+    }
 </style>

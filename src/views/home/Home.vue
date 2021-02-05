@@ -1,20 +1,18 @@
 <template>
     <div class="home">
-        <div class="indexinput-box">
+            <div class="indexinput-box">
             <input class="indexinput" confirm-type="done" placeholder="请输入" type="text" v-model.lazy="inputtext"
                    value="inputtext"/>
-        </div>
-        <div>{{parentsin}}</div>
-        <HelloWorld :collapsed="collapsed" :inputtext="inputtext" @com-click="commonClick" msg="Hello I Like You"/>
-        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-            <div id="vdoms"></div>
-            <van-loading color="#ff6464" v-show="busy"/>
-        </van-pull-refresh>
-
-
+            </div>
+            <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+                <van-skeleton :row="20" v-if="isLoading"/>
+                <div id="vdoms"></div>
+                <van-loading color="#ff6464" v-show="busy"/>
+            </van-pull-refresh>
         <Tabbar :badges="badges"></Tabbar>
     </div>
 </template>
+
 
 <script lang="ts">
     import {Component, Vue, Watch, Provide} from 'vue-property-decorator';
@@ -22,15 +20,17 @@
     import CreateDom from '../../utils/createdom.js';
     import {filterXSS} from "xss";
     import Tabbar from '../../components/tabbar.vue'
-    import { A, B} from '../../utils/dom'
+    import {A, B} from '../../utils/dom'
+    import draggable from 'vuedraggable'
 
     const createDom = new CreateDom();
-
+    const pageStartTime = Date.now();
 
     @Component({
         components: {
             HelloWorld,
-            Tabbar
+            Tabbar,
+            draggable
         },
         provide: {  //provide也可以作为一个对象进行使用.
             "foo": '哈哈哈哈哈哈',
@@ -44,7 +44,6 @@
         public busy = false;
         private isLoading = false;
         private badges = '1';
-
 
 
         get parentsin() {
@@ -62,13 +61,58 @@
         }
 
         async mounted() {
+
             localStorage.setItem('badges', '9')
             this.getData();
             this.handBottom();
             const aa = new A('哈哈哈').sayName();
             const bb = new B('哈哈哈').sayName();
 
+            const per = window.performance.timing;
+            setTimeout(() => {
+                console.log('DNS查询耗时' + this.getsec(per.domainLookupEnd - per.domainLookupStart))
+                console.log('TCP链接耗时' + this.getsec(per.connectEnd - per.connectStart))
+                console.log('request请求响应耗时' + this.getsec(per.responseEnd - per.responseStart))
+                console.log('dom渲染耗时' + this.getsec(per.domComplete - per.domInteractive))
+                console.log('白屏时间' + this.getsec(Date.now() - pageStartTime))
+                console.log('domready可操作时间' + this.getsec(per.domContentLoadedEventEnd - per.fetchStart))
+            })
+            console.log(Object.prototype.toString.call(true).slice(8, -1))
 
+
+            this.sorts()
+        }
+
+        //手写一个sort
+        public sorts(): void {
+            const insertSort = (arr: any, start = 0, end: number) => {
+
+                end = end === arr.length ? end : arr.length;
+
+                for (let i = start; i < end; i++) {
+
+                    const e: any = arr[i];
+
+                    let j;
+
+                    for (j = i; j > start && arr[j - 1] > e; j--)
+
+                        arr[j] = arr[j - 1];
+
+                        arr[j] = e;
+
+                }
+
+                return arr;
+
+
+            }
+            console.log(insertSort([5, 11, 23, 54, 0, 22, 12, 43, 9], 0, 99))
+        }
+
+
+        public getsec(time: number): any {
+            return time >= 1000 ? (time / 1000).toFixed(2) + 's' : time + 'ms'
         }
 
         public onRefresh() {
@@ -160,11 +204,13 @@
 
         //获取缓存，没有缓存就先去获取getAccessToken
         public async getData<T>() {
+            this.isLoading = true;
             const topicsChild: any = localStorage.getItem('topics');
             const topics: T[] = JSON.parse(topicsChild);
             if (topics && topics.length > 0) {
                 createDom.createDom(topics);//重新渲染
                 (this as any).indexList = topics;
+                this.isLoading = false;
             } else {
                 this.$toast.loading({message: 'loading...', forbidClick: true})
                 await this.$store.dispatch('getAccessToken').then(() => {
@@ -174,3 +220,20 @@
         }
     }
 </script>
+
+<style scoped lang="scss">
+    .van-skeleton__content{
+       column-count: 2;
+       column-gap: 16px;
+       background-color: rgb(245, 246, 250);
+    }
+    .van-skeleton__title,.van-skeleton__row{
+        height: 180px;
+        padding: 0.32rem;
+        margin-top: 0 !important;
+        border: solid 2px white;
+        font-size: 36px;
+        display: inline-block;
+        width: -webkit-fill-available !important;
+    }
+</style>

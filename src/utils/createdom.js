@@ -3,6 +3,7 @@ import { classModule } from 'snabbdom/modules/class';
 import { propsModule } from 'snabbdom/modules/props';
 import { styleModule } from 'snabbdom/modules/style';
 import { eventListenersModule } from 'snabbdom/modules/eventlisteners';
+import store from '../store';
 class Animals {
     constructor() {
         this.userName = 'Tom';
@@ -44,12 +45,15 @@ class Animals {
                 props: {
                     'data-index': index,
                     'data-id': item._id,
-                    'data-title': item.commodity
+                    'data-title': item.commodity,
+                    'v:key': item.id
                 },
                 on: {
                     click: this.acount
                 }
-            }, item.commodity + '');
+            }, [h('div', { class: { title: true } }, item.commodity),
+                h('div', { class: { price: true } }, '￥' + item.unitprice)
+            ]);
         }));
         //对比,有vnode时diff更新
         if (this.vnode) {
@@ -72,6 +76,8 @@ class Animals {
     acount(e) {
         //console.log(e.target['data-index']?e.target['data-index']:0,e.target['data-id'],e.target['data-title'])
         let ele;
+        const productData = JSON.parse(store.state.productData.data.resp_data).webProduct.data;
+        store.commit('addCart', productData[e.target['data-index'] ? e.target['data-index'] : 0]);
         for (ele of e.target.parentNode.childNodes) {
             if (ele.className.includes('active')) {
                 ele.classList.remove('active');

@@ -10,7 +10,7 @@ import {filterXSS} from "xss";
 })
 export default class Common extends Vue implements Utils.Mixinios {
     //定义
-    public name = `es6 class`;
+    public name = `this is test`;
     @Prop() collapsed!: boolean | string;
 
     //传回父级

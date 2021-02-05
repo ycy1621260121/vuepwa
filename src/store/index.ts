@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex, {StoreOptions} from 'vuex';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://192.168.68.132:8089';
+axios.defaults.baseURL = 'http://192.168.0.104:8089';
 axios.defaults.timeout = 5000;
 
 Vue.use(Vuex);
@@ -21,6 +21,11 @@ export const mutations = {
     },
     changeParent(state: any, data: any) {
         state.parents = data;
+    },
+    addCart(state: any, data: any){
+        const cartList = [];
+        cartList.push(data);
+        state.cartList = cartList;
     }
 };
 export const actions = {
@@ -37,7 +42,11 @@ export const actions = {
     },
     //获取云开发数据
     async getProductData(context: any, payload: any) {
-        await axios.post('/getProductData?token=' + encodeURIComponent(payload.token))
+        await axios.post('/getProductData',{token:encodeURIComponent(payload.token)},{
+            headers: {
+                'Cache-Control': 'max-age=315360000'
+            }
+        })
             .then((res: any) => {
                 //if (payload.success) payload.success(res); //同步回调
                 context.commit('setProductData', res);
@@ -52,7 +61,8 @@ const store: StoreOptions<Utils.Stores> = {
         token: '',
         productData: [],
         parents: '还哈哈哈',
-        isLogin: true
+        isLogin: true,
+        cartList:[]
     },
     mutations,
     actions,

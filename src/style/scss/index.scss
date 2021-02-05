@@ -9,6 +9,7 @@
   padding: 24px;
   background-color: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
   .indexinput {
     flex: 1;
     width: -webkit-fill-available;
@@ -27,12 +28,27 @@
   .item {
     border: solid 2px white;
     font-size: 36px;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: -webkit-fill-available;
+    height: 180px;
+    background-color: #f5f6fa;
+    text-align: left;
 
     &.active {
       color: red;
     }
+  }
+
+  .title {
+    align-self: flex-start;
+  }
+
+  .price {
+    align-self: flex-start;
+    font-size: 48px;
+    color: #ff6464;
   }
 }
 
@@ -84,10 +100,8 @@
   }
 
 }
-.imgthis{
-  width: 702px;
-  height: 443px;
-}
-.title-center{
+
+.title-center {
   font-size: 20px;
 }
+

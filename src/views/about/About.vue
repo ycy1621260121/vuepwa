@@ -1,12 +1,17 @@
 <template>
     <div class="about">
-        <div class="left">LEFT</div>
-        <div class="right">RIGHT</div>
-        <div class="par">
-            <div class="child"></div>
-            <div class="child"></div>
-        </div>
-
+        <ul v-if="cartLists.length>0">
+            <li v-for="(item,index) in cartLists" v-bind:key="index" class="about-list">
+                <div class="left-img">
+                    <img src="../../assets/logo.png" alt="图片">
+                </div>
+                <div class="right-con">
+                    <div class="right-con-title">商品：{{item.commodity}}</div>
+                    <div class="right-con-price">价格：￥{{item.unitprice}}</div>
+                </div>
+            </li>
+        </ul>
+        <van-skeleton title :row="3" v-if="cartLists.length == 0" style="margin-top: 24px"/>
         <Tabbar></Tabbar>
     </div>
 </template>
@@ -20,41 +25,43 @@
         }
     })
     export default class Apps extends Vue {
-
+        get cartLists(){
+            return this.$store.state.cartList;
+        }
     }
 
 </script>
 <style lang="scss" scoped>
-    .par {
-        overflow: hidden;/*加上这个可以清除浮动*/
-        border: 5px solid #cccccc;
-        width: 300px;
-        padding: 10px;
+    .about-list {
+      width: 702px;
+      margin: 24px;
+      background-color: #f5f6fa;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      .left-img {
+        width: 200px;
+        height: 200px;
+        img {
+          width: 200px;
+          height: 200px;
+          display: block;
+        }
+      }
     }
 
-    .child {
-        border: 5px solid #bbbbbb;
-        width: 100px;
-        height: 100px;
-        float: left;
-    }
+    .right-con {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .right-con-title {
+          align-self: flex-start;
+          font-size: 24px;
+        }
+        .right-con-price{
+            margin-top: 20px;
+            align-self: flex-start;
+        }
+      }
 
-    .left {
-        width: 100px;
-        height: 150px;
-        float: left;
-        background: #eeeeee;
-        text-align: center;
-        line-height: 150px;
-        font-size: 20px;
-    }
-
-    .right {
-        overflow: hidden;/*加上这个可以清除浮动*/
-        height: 100px;
-        background: #d3d3d3;
-        text-align: center;
-        line-height: 100px;
-        font-size: 24px;
-    }
 </style>

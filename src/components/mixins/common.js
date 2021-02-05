@@ -5,7 +5,7 @@ let Common = class Common extends Vue {
     constructor() {
         super(...arguments);
         //定义
-        this.name = `es6 class`;
+        this.name = `this is test`;
     }
     //传回父级
     comClick() {
