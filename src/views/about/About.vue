@@ -33,9 +33,6 @@
 </script>
 <style lang="scss" scoped>
     .about-list {
-       -webkit-transform:translate3d(250px,250px,250px)
-  rotate3d(250px,250px,250px,-120deg)
-  scale3d(0.5,0.5,0.5);
       width: 702px;
       margin: 24px;
       background-color: #f5f6fa;

@@ -1,14 +1,14 @@
 <template>
     <div class="home">
-            <div class="indexinput-box">
+        <div class="indexinput-box">
             <input class="indexinput" confirm-type="done" placeholder="请输入" type="text" v-model.lazy="inputtext"
                    value="inputtext"/>
-            </div>
-            <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-                <van-skeleton :row="20" v-if="isLoading"/>
-                <div id="vdoms"></div>
-                <van-loading color="#ff6464" v-show="busy"/>
-            </van-pull-refresh>
+        </div>
+        <!--<van-pull-refresh v-model="isLoading" @refresh="onRefresh">-->
+        <!--</van-pull-refresh>-->
+        <van-skeleton :row="20" v-if="isLoading"/>
+        <div id="vdoms"></div>
+        <van-loading color="#ff6464" v-show="busy"/>
         <Tabbar :badges="badges"></Tabbar>
     </div>
 </template>
@@ -61,10 +61,8 @@
         }
 
         async mounted() {
-
             localStorage.setItem('badges', '9')
             this.getData();
-            this.handBottom();
             const aa = new A('哈哈哈').sayName();
             const bb = new B('哈哈哈').sayName();
 
@@ -99,7 +97,7 @@
 
                         arr[j] = arr[j - 1];
 
-                        arr[j] = e;
+                    arr[j] = e;
 
                 }
 
@@ -154,20 +152,20 @@
             createDom.createDom(indexListData.slice(0, 15));
         }
 
-        public handBottom() {
+        created() {
             //this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行。
             this.$nextTick(() => {
                 // 进入nexTick
-                const bady: any = document.body; // 获取滚动条的dom
-                // console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
-                bady.onscroll = () => {
+                const boo: any = document.body; // 获取滚动条的dom
+                //console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
+                boo.onscroll = () => {
                     // 获取距离顶部的距离
-                    const scrollTop: number = bady.scrollTop;
+                    const scrollTop: number = boo.scrollTop;
                     // 获取可视区的高度
-                    const windowHeight: number = bady.clientHeight;
+                    const windowHeight: number = boo.clientHeight;
                     // 获取滚动条的总高度
-                    const scrollHeight: number = bady.scrollHeight;
-                    //console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
+                    const scrollHeight: number = boo.scrollHeight;
+                    console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
                     if (scrollTop + windowHeight >= scrollHeight) {
                         // 把距离顶部的距离加上可视区域的高度 等于或者大于滚动条的总高度就是到达底部
                         this.handLoadMore();
@@ -222,12 +220,13 @@
 </script>
 
 <style scoped lang="scss">
-    .van-skeleton__content{
-       column-count: 2;
-       column-gap: 16px;
-       background-color: rgb(245, 246, 250);
+    .van-skeleton__content {
+        column-count: 2;
+        column-gap: 16px;
+        background-color: rgb(245, 246, 250);
     }
-    .van-skeleton__title,.van-skeleton__row{
+
+    .van-skeleton__title, .van-skeleton__row {
         height: 180px;
         padding: 0.32rem;
         margin-top: 0 !important;
