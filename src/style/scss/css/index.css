@@ -23,7 +23,7 @@
   #dombox .item {
     border: solid 2px white;
     font-size: 36px;
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     justify-content: space-between;
     width: -webkit-fill-available;
@@ -37,7 +37,8 @@
   #dombox .price {
     align-self: flex-start;
     font-size: 48px;
-    color: #ff6464; }
+    color: #ff6464;
+    margin-top: 12px; }
 
 .demo-spin-container {
   display: inline-block;
