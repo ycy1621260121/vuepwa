@@ -20,14 +20,26 @@ export const mutations = {
     },
     addCart(state, data) {
         const cartList = state.cartList || [];
-        cartList.push(data);
-        //数组去重
-        const hash = [];
-        const cartList2 = cartList.reduce((preVal, curVal) => {
-            hash[curVal._id] ? '' : hash[curVal._id] = true && preVal.push(curVal);
-            return preVal;
-        }, []);
-        state.cartList = cartList2;
+        //cartList.push(data);
+        const result = cartList.some((item) => {
+            if (item._id === data._id) {
+                return true;
+            }
+        });
+        // 如果数组对象中含有_id,就会返回true，否则返回false
+        if (result) { // 如果存在
+            for (const value of cartList) {
+                // console.log(value.selectColorindex, data.selectColorindex, value.selectSizeindex, data.selectSizeindex)
+                if (value._id === data._id) {
+                    value.count = value.count + 1;
+                }
+            }
+        }
+        else {
+            data.count ? data.count++ : data.count = 1;
+            cartList.unshift(data);
+        }
+        state.cartList = cartList;
     },
     changemyArray(state, data) {
         state.myArray = data;

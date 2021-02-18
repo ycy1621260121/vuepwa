@@ -1,17 +1,21 @@
 <template>
     <div class="about">
-        <ul v-if="cartLists.length>0">
-            <li v-for="(item,index) in cartLists" v-bind:key="index" class="about-list">
+        <van-skeleton title :row="3" v-if="cartLists.length == 0" style="padding-top: 24px"/>
+        <div v-else>
+            <div v-for="(item,index) in cartLists" v-bind:key="index" class="about-list">
                 <div class="left-img">
                     <img src="../../assets/logo.png" alt="图片">
                 </div>
                 <div class="right-con">
                     <div class="right-con-title">商品：{{item.commodity}}</div>
-                    <div class="right-con-price">价格：￥{{item.unitprice}}</div>
+                    <div class="right-con-countAll">
+                        <div class="right-con-price">价格：￥{{item.unitprice}}</div>
+                        <div class="right-con-count">x{{item.count || 1}}</div>
+                    </div>
                 </div>
-            </li>
-        </ul>
-        <van-skeleton title :row="3" v-if="cartLists.length == 0" style="padding-top: 24px"/>
+            </div>
+        </div>
+
         <Tabbar></Tabbar>
     </div>
 </template>
@@ -25,43 +29,12 @@
         }
     })
     export default class Apps extends Vue {
-        get cartLists(){
+        get cartLists() {
             return this.$store.state.cartList;
         }
     }
 
 </script>
 <style lang="scss" scoped>
-    .about-list {
-      width: 702px;
-      margin: 24px;
-      background-color: #f5f6fa;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      .left-img {
-        width: 200px;
-        height: 200px;
-        img {
-          width: 200px;
-          height: 200px;
-          display: block;
-        }
-      }
-    }
-
-    .right-con {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        .right-con-title {
-          align-self: flex-start;
-          font-size: 24px;
-        }
-        .right-con-price{
-            margin-top: 20px;
-            align-self: flex-start;
-        }
-      }
-
+    @import "../../style/scss/css/about.css";
 </style>

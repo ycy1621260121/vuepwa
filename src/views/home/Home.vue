@@ -61,6 +61,7 @@
         }
 
         async mounted() {
+            await this.handBottom()
             localStorage.setItem('badges', '9')
             this.getData();
             const aa = new A('哈哈哈').sayName();
@@ -97,7 +98,7 @@
 
                         arr[j] = arr[j - 1];
 
-                    arr[j] = e;
+                        arr[j] = e;
 
                 }
 
@@ -113,11 +114,11 @@
             return time >= 1000 ? (time / 1000).toFixed(2) + 's' : time + 'ms'
         }
 
-        public onRefresh() {
-            localStorage.removeItem('topics')
-            this.isClick = 0;
-            this.getData();
-        }
+        // public handBottom() {
+        //     localStorage.removeItem('topics')
+        //     this.isClick = 0;
+        //     this.getData();
+        // }
 
 
         public typeClick<T>(): void {
@@ -152,20 +153,20 @@
             createDom.createDom(indexListData.slice(0, 15));
         }
 
-        created() {
+        public handBottom() {
             //this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行。
             this.$nextTick(() => {
                 // 进入nexTick
-                const boo: any = document.body; // 获取滚动条的dom
-                //console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
-                boo.onscroll = () => {
+                const bady: any = document.body; // 获取滚动条的dom
+                // console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
+                bady.onscroll = () => {
                     // 获取距离顶部的距离
-                    const scrollTop: number = boo.scrollTop;
+                    const scrollTop: number = bady.scrollTop;
                     // 获取可视区的高度
-                    const windowHeight: number = boo.clientHeight;
+                    const windowHeight: number = bady.clientHeight;
                     // 获取滚动条的总高度
-                    const scrollHeight: number = boo.scrollHeight;
-                    console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
+                    const scrollHeight: number = bady.scrollHeight;
+                    //console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
                     if (scrollTop + windowHeight >= scrollHeight) {
                         // 把距离顶部的距离加上可视区域的高度 等于或者大于滚动条的总高度就是到达底部
                         this.handLoadMore();
@@ -224,6 +225,7 @@
         column-count: 2;
         column-gap: 16px;
         background-color: rgb(245, 246, 250);
+        margin-top: 24px;
     }
 
     .van-skeleton__title, .van-skeleton__row {

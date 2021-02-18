@@ -1,0 +1,39 @@
+.about-list {
+  width: 702px;
+  margin: 24px;
+  background-color: #f5f6fa;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; }
+  .about-list .left-img {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px; }
+    .about-list .left-img img {
+      width: 200px;
+      height: 200px;
+      display: block; }
+
+.right-con {
+  width: 478px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .right-con .right-con-title {
+    align-self: flex-start;
+    font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+  .right-con .right-con-countAll {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+    margin-top: 20px; }
+  .right-con .right-con-count {
+    align-self: center; }
+  .right-con .right-con-price {
+    align-self: flex-start; }
+
+/*# sourceMappingURL=about.css.map */

@@ -51,8 +51,8 @@ class Animals {
                 on: {
                     click: this.acount
                 }
-            }, [h('div', { class: { title: true } }, item.commodity),
-                h('div', { class: { price: true } }, '￥' + item.unitprice)
+            }, [h('div', { class: { title: true }, props: { 'data-index': index } }, item.commodity),
+                h('div', { class: { price: true }, props: { 'data-index': index } }, '￥' + item.unitprice)
             ]);
         }));
         //对比,有vnode时diff更新
@@ -75,15 +75,17 @@ class Animals {
     //domevent
     acount(e) {
         //console.log(e.target['data-index']?e.target['data-index']:0,e.target['data-id'],e.target['data-title'])
+        const childrenData = document.getElementById('dombox').children;
+        //console.log(childrenData[e.target['data-index']])
         let ele;
         const productData = JSON.parse(store.state.productData.data.resp_data).webProduct.data;
         store.commit('addCart', productData[e.target['data-index'] ? e.target['data-index'] : 0]);
-        for (ele of e.target.parentNode.childNodes) {
+        for (ele of childrenData) {
             if (ele.className.includes('active')) {
                 ele.classList.remove('active');
             }
         }
-        e.target.classList.add('active');
+        childrenData[e.target['data-index']].classList.add('active');
     }
 }
 class Ani extends Animals {
